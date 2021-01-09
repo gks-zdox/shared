@@ -1,0 +1,48 @@
+:host {
+   display: flex;
+   justify-content: space-between;
+   line-height: 24px;
+}
+
+.mat-snack-bar-container {
+   &.toast-info .mat-icon {
+      color: #56c0e0;
+   }
+
+   &.toast-success .mat-icon {
+      color: #1bbf89;
+   }
+
+   &.toast-warn {
+      background-color: #323232;
+      color: #ffc107;
+   }
+
+   &.toast-error {
+      background-color: #f44336;
+      color: #fff;
+   }
+}
+
+.toast-icon {
+   margin-right: 10px;
+}
+
+.toast-text {
+   align-self: center;
+}
+
+.toast-action {
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   cursor: pointer;
+   outline: 0;
+   border: none;
+   -webkit-tap-highlight-color: transparent;
+   background: none;
+   flex-shrink: 0;
+   margin-left: 48px;
+   padding: 4px 10px;
+}

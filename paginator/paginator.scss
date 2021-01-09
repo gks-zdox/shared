@@ -1,0 +1,52 @@
+::ng-deep .app-paginator {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.range {
+   border-radius: 4px;
+   display: inline-block;
+   padding: 4px 8px;
+   user-select: none;
+   background-color: transparent;
+   transition: background-color .2s;
+   white-space: nowrap;
+}
+
+.has-more:hover, .has-more.active {
+   background-color: rgba(255, 255, 255, .1);
+   cursor: pointer;
+}
+
+.mat-icon-button {
+   width: 32px;
+   height: 32px;
+   line-height: 0;
+}
+
+button:focus::before,
+button:active:not(:disabled)::before {
+   content: '';
+   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2);
+   position: absolute;
+   left: 0;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   border-radius: 50%;
+}
+
+svg {
+   fill: currentColor;
+   width: 20px;
+}
+
+.mat-menu-item {
+   font-size: 13px;
+}
+
+.mat-menu-item .mat-icon {
+   color: #00bcd4;
+   margin-right: 8px;
+}

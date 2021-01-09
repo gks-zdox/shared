@@ -1,0 +1,19 @@
+:host {
+   position: relative;
+}
+
+input {
+   height: 32px;
+   padding-right: 36px;
+   width: 100%;
+}
+
+mat-icon {
+   width: 32px;
+   height: 32px;
+   line-height: 32px;
+   padding: 4px;
+   text-align: center;
+   position: absolute;
+   right: 0;
+}

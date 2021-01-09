@@ -1,0 +1,57 @@
+<span class="trigger"
+      [matMenuTriggerFor]="itemsMenu"
+      (menuOpened)="menuOpened = true"
+      (menuClosed)="delayClose()"></span>
+<span class="range"
+      (click)="clickItemPerPage()"
+      [ngClass]="{'active': menuOpened, 'has-more': hasMore()}">{{getRangeLabel()}}</span>
+<mat-menu #itemsMenu="matMenu" [overlapTrigger]="false">
+   <div *ngFor="let pageSizeOption of displayedPageSizeOptions" mat-menu-item
+      (click)="pageSizeOption === size ? $event.preventDefault() : _changePageSize(pageSizeOption)">
+      <mat-icon [ngClass]="{'hidden': pageSizeOption !== size}">checked</mat-icon>
+      {{pageSizeOption}} items per page
+   </div>
+</mat-menu>
+
+<button mat-icon-button
+        (click)="firstPage()"
+        matTooltip="First page"
+        [matTooltipDisabled]="_previousButtonsDisabled()"
+        matTooltipPosition="above"
+        [disabled]="_previousButtonsDisabled()"
+        *ngIf="showFirstLastButtons">
+   <svg viewBox="0 0 24 24" focusable="false">
+      <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"/>
+   </svg>
+</button>
+<button mat-icon-button
+        (click)="previousPage()"
+        matTooltip="Previous page"
+        [matTooltipDisabled]="_previousButtonsDisabled()"
+        matTooltipPosition="above"
+        [disabled]="_previousButtonsDisabled()">
+   <svg viewBox="0 0 24 24" focusable="false">
+      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+   </svg>
+</button>
+<button mat-icon-button
+        (click)="nextPage()"
+        matTooltip="Next page"
+        [matTooltipDisabled]="_nextButtonsDisabled()"
+        matTooltipPosition="above"
+        [disabled]="_nextButtonsDisabled()">
+   <svg viewBox="0 0 24 24" focusable="false">
+      <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+   </svg>
+</button>
+<button mat-icon-button
+        (click)="lastPage()"
+        matTooltip="Last page"
+        [matTooltipDisabled]="_nextButtonsDisabled()"
+        matTooltipPosition="above"
+        [disabled]="_nextButtonsDisabled()"
+        *ngIf="showFirstLastButtons">
+   <svg viewBox="0 0 24 24" focusable="false">
+      <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"/>
+   </svg>
+</button>

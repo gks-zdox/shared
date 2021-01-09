@@ -1,0 +1,9 @@
+<input [type]="visible ? 'text' : 'password'" [required]="required" class="fx"
+       #input [(ngModel)]="value" (keypress)="onKeypress($event)"
+       [readonly]="readonly" (blur)="onTouched()"
+       [minlength]="minlength" [maxlength]="maxlength"
+       [pattern]="pattern" [placeholder]="placeholder">
+<mat-icon [svgIcon]="visible ? 'visible' : 'invisible'"
+          class="action"
+          [matTooltip]="visible ? 'Hide password' : 'Show password'"
+          (click)="visible = !visible"></mat-icon>

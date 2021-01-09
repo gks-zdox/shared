@@ -1,0 +1,12 @@
+<h1 mat-dialog-title *ngIf="options.title" [class]="titleClass">
+   <mat-icon *ngIf="titleIcon">{{titleIcon}}</mat-icon> {{titleText}}
+</h1>
+
+<mat-dialog-content *ngIf="options.message" [innerHtml]="options.message"></mat-dialog-content>
+
+<mat-dialog-actions align="end">
+   <button *ngIf="options.close" mat-stroked-button mat-dialog-close>{{options.close}}</button>
+   <button *ngIf="options.accept" loading-flat #button
+           [color]="acceptColor"
+           (click)="accept(button)">{{acceptLabel}}</button>
+</mat-dialog-actions>

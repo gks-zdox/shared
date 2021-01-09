@@ -1,0 +1,7 @@
+<span class="button-spinner {{color}}"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i></span>
+<span class="mat-button-wrapper"><ng-content></ng-content></span>
+<span matRipple class="mat-button-ripple"
+      [matRippleDisabled]="isRippleDisabled()"
+      [matRippleCentered]="false"
+      [matRippleTrigger]="getHostElement()"></span>
+<span class="mat-button-focus-overlay"></span>
