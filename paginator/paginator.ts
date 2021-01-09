@@ -13,52 +13,34 @@ const DEFAULT_PAGE_SIZE = 50;
 })
 export class PaginatorComponent implements OnInit {
    @HostBinding('class') get className(): string { return 'app-paginator'; }
+   @Input() count = 0;
+   @Input() page = 0;
+   @Input() showFirstLastButtons = true;
    @Output() pageChange = new EventEmitter<PageEvent>();
    @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
    displayedPageSizeOptions: number[] = [];
    menuOpened = false;
-   private _count = 0;
-   private _page = 0;
-   private _size = 0;
-   private _pageSizeOptions: number[] = [50, 100, 150, 200];
-   private _showFirstLastButtons = true;
+   private pageSize = 0;
+   private currentPageSizeOptions: number[] = [50, 100, 150, 200];
 
    constructor(private numeral: NumeralPipe) { }
 
    ngOnInit(): void {
-      this._updateDisplayedPageSizeOptions();
+      this.updateDisplayedPageSizeOptions();
    }
 
    @Input()
-   get count(): number { return this._count; }
-   set count(value: number) {
-      this._count = value;
-   }
-
-   @Input()
-   get page(): number { return this._page; }
-   set page(value: number) {
-      this._page = value < 0 ? 0 : value;
-   }
-
-   @Input()
-   get size(): number { return this._size; }
+   get size(): number { return this.pageSize; }
    set size(value: number) {
-      this._size = value < 0 ? 0 : value;
-      this._updateDisplayedPageSizeOptions();
+      this.pageSize = value < 0 ? 0 : value;
+      this.updateDisplayedPageSizeOptions();
    }
 
    @Input()
-   get pageSizeOptions(): number[] { return this._pageSizeOptions; }
+   get pageSizeOptions(): number[] { return this.currentPageSizeOptions; }
    set pageSizeOptions(value: number[]) {
-      this._pageSizeOptions = value || [];
-      this._updateDisplayedPageSizeOptions();
-   }
-
-   @Input()
-   get showFirstLastButtons(): boolean { return this._showFirstLastButtons; }
-   set showFirstLastButtons(value: boolean) {
-      this._showFirstLastButtons = value;
+      this.currentPageSizeOptions = value || [];
+      this.updateDisplayedPageSizeOptions();
    }
 
    nextPage(): void {
@@ -66,7 +48,7 @@ export class PaginatorComponent implements OnInit {
 
       const previousPageIndex = this.page;
       this.page++;
-      this._emitPageEvent(previousPageIndex);
+      this.emitPageEvent(previousPageIndex);
    }
 
    previousPage(): void {
@@ -74,7 +56,7 @@ export class PaginatorComponent implements OnInit {
 
       const previousPageIndex = this.page;
       this.page--;
-      this._emitPageEvent(previousPageIndex);
+      this.emitPageEvent(previousPageIndex);
    }
 
    firstPage(): void {
@@ -82,7 +64,7 @@ export class PaginatorComponent implements OnInit {
 
       const previousPageIndex = this.page;
       this.page = 0;
-      this._emitPageEvent(previousPageIndex);
+      this.emitPageEvent(previousPageIndex);
    }
 
    lastPage(): void {
@@ -90,7 +72,7 @@ export class PaginatorComponent implements OnInit {
 
       const previousPageIndex = this.page;
       this.page = this.getNumberOfPages() - 1;
-      this._emitPageEvent(previousPageIndex);
+      this.emitPageEvent(previousPageIndex);
    }
 
    hasPreviousPage(): boolean {
@@ -115,7 +97,7 @@ export class PaginatorComponent implements OnInit {
 
       this.page = Math.floor(startIndex / pageSize) || 0;
       this.size = pageSize;
-      this._emitPageEvent(previousPageIndex);
+      this.emitPageEvent(previousPageIndex);
    }
 
    _nextButtonsDisabled(): boolean {
@@ -124,29 +106,6 @@ export class PaginatorComponent implements OnInit {
 
    _previousButtonsDisabled(): boolean {
       return !this.hasPreviousPage();
-   }
-
-   private _updateDisplayedPageSizeOptions(): void {
-      if (!this.size) {
-         this._size = this.pageSizeOptions.length > 0 ? this.pageSizeOptions[0] : DEFAULT_PAGE_SIZE;
-      }
-
-      this.displayedPageSizeOptions = this.pageSizeOptions.slice();
-
-      if (this.displayedPageSizeOptions.indexOf(this.size) === -1) {
-         this.displayedPageSizeOptions.push(this.size);
-      }
-
-      this.displayedPageSizeOptions.sort((a, b) => a - b);
-   }
-
-   private _emitPageEvent(previousPageIndex: number): void {
-      this.pageChange.emit({
-         previousPageIndex,
-         pageIndex: this.page,
-         pageSize: this.size,
-         length: this.count
-      });
    }
 
    getRangeLabel(): string {
@@ -175,5 +134,28 @@ export class PaginatorComponent implements OnInit {
 
    delayClose(): void {
       setTimeout(() => { this.menuOpened = false; }, 100);
+   }
+
+   private updateDisplayedPageSizeOptions(): void {
+      if (!this.size) {
+         this.pageSize = this.pageSizeOptions.length > 0 ? this.pageSizeOptions[0] : DEFAULT_PAGE_SIZE;
+      }
+
+      this.displayedPageSizeOptions = this.pageSizeOptions.slice();
+
+      if (this.displayedPageSizeOptions.indexOf(this.size) === -1) {
+         this.displayedPageSizeOptions.push(this.size);
+      }
+
+      this.displayedPageSizeOptions.sort((a, b) => a - b);
+   }
+
+   private emitPageEvent(previousPageIndex: number): void {
+      this.pageChange.emit({
+         previousPageIndex,
+         pageIndex: this.page,
+         pageSize: this.size,
+         length: this.count
+      });
    }
 }

@@ -11,9 +11,9 @@ import { MessageBox } from './message-box/message-box';
 
 @Injectable()
 export class RestClient {
+   @Output() unauthorized = new EventEmitter();
    public readonly url = environment.serviceUrl;
    token = '';
-   @Output() unauthorized = new EventEmitter();
 
    constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private toast: Toast, private msgBox: MessageBox) { }
 
@@ -70,7 +70,7 @@ export class RestClient {
       return (e: any): Observable<any> => {
          let ex: any = { api, status: 0, message: undefined };
          if (e.error instanceof ArrayBuffer || e.error instanceof Blob) {
-            const error = this._getError(e.error);
+            const error = this.getError(e.error);
             if (error) { ex = error; }
          } else if (typeof e.error === 'string') {
             ex.message = e.error;
@@ -103,7 +103,7 @@ export class RestClient {
       };
    }
 
-   private _getError(error: ArrayBuffer | Blob): any {
+   private getError(error: ArrayBuffer | Blob): any {
       const object = error instanceof Blob ? error : new Blob([error]);
       const blobUrl = window.URL.createObjectURL(object);
       const xhr = new XMLHttpRequest();

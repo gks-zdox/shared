@@ -8,28 +8,30 @@ class LoadingButtonBase {
    constructor(public _elementRef: ElementRef) { }
 }
 
+// eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
 const _ButtonMixinBase: CanDisableRippleCtor & CanDisableCtor & CanColorCtor
    & typeof LoadingButtonBase = mixinColor(mixinDisabled(mixinDisableRipple(LoadingButtonBase)));
 
 @Component({
-   // tslint:disable-next-line: component-selector
+   // eslint-disable-next-line @angular-eslint/component-selector
    selector: 'button[loading-button], button[loading-flat], button[loading-stroked]',
    exportAs: 'loadingButton',
-   // tslint:disable-next-line: no-host-metadata-property
+   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
    host: {
       '[attr.disabled]': 'disabled || null',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       '[class._mat-animation-noopable]': '_animationMode === "NoopAnimations"',
       '[class.mat-button-disabled]': 'disabled',
       class: 'mat-focus-indicator'
    },
    templateUrl: 'loading-button.html',
    styleUrls: ['loading-button.scss'],
-   // tslint:disable-next-line: no-inputs-metadata-property
+   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
    inputs: ['disabled', 'disableRipple', 'color'],
    encapsulation: ViewEncapsulation.None,
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-// tslint:disable-next-line: component-class-suffix
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LoadingButton extends _ButtonMixinBase
    implements AfterViewInit, OnDestroy, CanDisable, CanColor, CanDisableRipple, FocusableOption {
    @HostBinding('class.loading') loading = false;

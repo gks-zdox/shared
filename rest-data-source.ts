@@ -7,6 +7,7 @@ import { HttpParams } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 export class RestDataSource<T> implements DataSource<T> {
+   changes = new EventEmitter<HttpParams>();
    private readonly dataObservable = new BehaviorSubject<T[]>([]);
    private total = 0;
    private q = '';
@@ -14,7 +15,6 @@ export class RestDataSource<T> implements DataSource<T> {
    private matSort?: MatSort | null;
    private myPaginator?: PaginatorComponent | null;
    private selection = new SelectionModel<T>(true, []);
-   changes = new EventEmitter<HttpParams>();
 
    connect(): BehaviorSubject<T[]> {
       return this.dataObservable;
@@ -109,7 +109,11 @@ export class RestDataSource<T> implements DataSource<T> {
    }
 
    selectAll(checked: boolean): void {
-      checked ? this.data.forEach((item: T) => this.selection.select(item)) : this.selection.clear();
+      if (checked) {
+         this.data.forEach((item: T) => this.selection.select(item));
+      } else {
+         this.selection.clear();
+      }
    }
 
    toggle(value: T): void {
