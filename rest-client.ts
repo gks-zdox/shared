@@ -3,17 +3,17 @@
  */
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpXsrfTokenExtractor } from '@angular/common/http';
+import { MessageBox } from './message-box/message-box';
+import { Toast } from './toast/toast';
 import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Toast } from './toast/toast';
-import { MessageBox } from './message-box/message-box';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class RestClient {
    @Output() unauthorized = new EventEmitter();
    public readonly url = environment.serviceUrl;
-   token = '';
+   public token = '';
 
    constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private toast: Toast, private msgBox: MessageBox) { }
 
@@ -46,7 +46,10 @@ export class RestClient {
    }
 
    private getUrl(api: string): string {
-      return `${environment.serviceUrl}${api.startsWith('/') ? api : `/${api}`}`;
+      if (api.startsWith('http')) {
+         return api;
+      }
+      return `${this.url}${api.startsWith('/') ? api : `/${api}`}`;
    }
 
    private createHttpOptions(options: any, json = false): any {
