@@ -16,6 +16,7 @@ export const MASKED_INPUT_ACCESSOR: any = {
 export class MaskedInputComponent implements ControlValueAccessor {
    @HostBinding('class') className = 'app-masked-input';
    @ViewChild('input') input!: ElementRef;
+   @Input() disabled = false;
    @Input() required: boolean | string = false;
    @Input() minlength: string | number = 1;
    @Input() maxlength: string | number = 255;
@@ -25,6 +26,15 @@ export class MaskedInputComponent implements ControlValueAccessor {
    @Output() next = new EventEmitter<any>();
    visible = false;
    private currentValue = '';
+
+   constructor(private elementRef: ElementRef) {
+      if (this.elementRef.nativeElement.hasAttribute('disabled')) {
+         this.disabled = true;
+      }
+      if (this.elementRef.nativeElement.hasAttribute('required')) {
+         this.required = true;
+      }
+   }
 
    onChange: (_: any) => void = (_: any) => { };
    onTouched: () => void = () => { };

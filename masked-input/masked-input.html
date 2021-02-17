@@ -1,11 +1,12 @@
 <input [type]="visible ? 'text' : 'password'" [required]="required" class="fx"
        #input [(ngModel)]="value" (keypress)="onKeypress($event)"
        [readonly]="readonly" (blur)="onTouched()"
+       [disabled]="disabled"
        [minlength]="minlength" [maxlength]="maxlength"
        [pattern]="pattern" [placeholder]="placeholder">
-<mat-icon class="action"
+<mat-icon [ngClass]="disabled ? 'disabled' : 'action'"
           [matTooltip]="visible ? 'Hide password' : 'Show password'"
-          (click)="visible = !visible">
+          (click)="disabled ? null : visible = !visible">
    <svg *ngIf="!visible" fill="currentColor" height="100%" viewBox="0 0 24 24" width="100%" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
       <path d="M10.58,7.25l1.56,1.56c1.38,0.07,2.47,1.17,2.54,2.54l1.56,1.56C16.4,12.47,16.5,12,16.5,11.5C16.5,9.02,14.48,7,12,7 C11.5,7,11.03,7.1,10.58,7.25z"></path>
       <path d="M12,6c3.79,0,7.17,2.13,8.82,5.5c-0.64,1.32-1.56,2.44-2.66,3.33l1.42,1.42c1.51-1.26,2.7-2.89,3.43-4.74 C21.27,7.11,17,4,12,4c-1.4,0-2.73,0.25-3.98,0.7L9.63,6.3C10.4,6.12,11.19,6,12,6z"></path>
