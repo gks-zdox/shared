@@ -8,7 +8,7 @@ input {
    width: 100%;
 }
 
-mat-icon {
+.mat-icon {
    width: 32px;
    height: 32px;
    line-height: 32px;
@@ -16,4 +16,8 @@ mat-icon {
    text-align: center;
    position: absolute;
    right: 0;
+
+   svg {
+      display: block;
+   }
 }
