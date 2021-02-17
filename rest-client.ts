@@ -5,14 +5,17 @@ import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpXsrfTokenExtractor } from '@angular/common/http';
 import { MessageBox } from './message-box/message-box';
 import { Toast } from './toast/toast';
-import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
+declare const serviceUrl: string;
+declare const authServiceUrl: string;
 
 @Injectable({ providedIn: 'root' })
 export class RestClient {
    @Output() unauthorized = new EventEmitter();
-   public readonly url = environment.serviceUrl;
+   public readonly url = serviceUrl;
+   public readonly authUrl = authServiceUrl;
    public token = '';
 
    constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private toast: Toast, private msgBox: MessageBox) { }
@@ -89,7 +92,7 @@ export class RestClient {
          }
          if (e.status === 401) {
             this.unauthorized.emit(null);
-            if (alert !== false && (!location.pathname.endsWith('/login') || api !== 'auth')) {
+            if (alert !== false && (!location.pathname.endsWith('/login') || !api.endsWith('/signin'))) {
                alert = false;
             }
          }
