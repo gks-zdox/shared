@@ -57,17 +57,19 @@ export class RestClient {
 
    private createHttpOptions(options: any, json = false): any {
       let headers: HttpHeaders = options.headers || new HttpHeaders();
+      headers = headers.set('Accept-Language', localStorage.getItem('lang') || 'en');
       if (json && !headers.has('Content-Type')) {
-         headers = headers.append('Content-Type', 'application/json;charset=utf-8');
+         headers = headers.set('Content-Type', 'application/json;charset=utf-8');
       }
       if (this.token) {
-         headers = headers.append('X-Auth-Token', this.token);
+         headers = headers.set('X-Auth-Token', this.token);
       }
       const xsrf = this.xsrfToken.getToken();
       if (xsrf) {
-         headers = headers.append('X-XSRF-Token', xsrf);
+         headers = headers.set('X-XSRF-Token', xsrf);
       }
-      options.headers = headers.append('X-Requested-With', 'XMLHttpRequest');
+      headers = headers.set('X-Requested-With', 'XMLHttpRequest');
+      options.headers = headers;
       options.withCredentials = true;
       return options;
    }
