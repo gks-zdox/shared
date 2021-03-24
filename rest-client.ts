@@ -9,6 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 declare const serviceUrl: string;
+declare const eFlowServiceUrl: string;
 declare const authServiceUrl: string;
 
 @Injectable({ providedIn: 'root' })
@@ -16,11 +17,13 @@ export class RestClient {
    @Output() unauthorized = new EventEmitter();
    public readonly url = serviceUrl;
    public readonly authUrl = authServiceUrl;
+   public readonly eflowUrl = eFlowServiceUrl;
    public token = '';
 
    constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private toast: Toast, private msgBox: MessageBox) { }
 
    get<T>(api: string, options: any = {}): Observable<T> {
+      console.log(this.getUrl(api));
       return this.http.get<T>(this.getUrl(api), this.createHttpOptions(options))
          .pipe(catchError(this.handleError(api, options.alert)));
    }
