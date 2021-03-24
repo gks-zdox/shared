@@ -23,7 +23,6 @@ export class RestClient {
    constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private toast: Toast, private msgBox: MessageBox) { }
 
    get<T>(api: string, options: any = {}): Observable<T> {
-      console.log(this.getUrl(api));
       return this.http.get<T>(this.getUrl(api), this.createHttpOptions(options))
          .pipe(catchError(this.handleError(api, options.alert)));
    }
