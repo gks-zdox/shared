@@ -9,16 +9,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 declare const serviceUrl: string;
-declare const authServiceUrl: string;
 
 @Injectable({ providedIn: 'root' })
 export class RestClient {
    @Output() unauthorized = new EventEmitter();
    public readonly url = serviceUrl;
-   public readonly authUrl = authServiceUrl;
    public token = '';
 
-   constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private toast: Toast, private msgBox: MessageBox) { }
+   constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private msgBox: MessageBox, private toast: Toast) { }
 
    get<T>(api: string, options: any = {}): Observable<T> {
       return this.http.get<T>(this.getUrl(api), this.createHttpOptions(options))
