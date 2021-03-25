@@ -13,8 +13,8 @@ declare const serviceUrl: string;
 @Injectable({ providedIn: 'root' })
 export class RestClient {
    @Output() unauthorized = new EventEmitter();
-   public readonly url = serviceUrl;
    public token = '';
+   protected url = serviceUrl;
 
    constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private msgBox: MessageBox, private toast: Toast) { }
 
@@ -50,7 +50,7 @@ export class RestClient {
       if (api.startsWith('http')) {
          return api;
       }
-      return `${this.url}${api.startsWith('/') ? api : `/${api}`}`;
+      return api.startsWith('/') ? `${this.url}${api}` : `${this.url}/${api}`;
    }
 
    private createHttpOptions(options: any, json = false): any {
