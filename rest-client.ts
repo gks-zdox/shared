@@ -92,7 +92,7 @@ export class RestClient {
          }
          if (e.status === 401) {
             this.unauthorized.emit(null);
-            if (alert !== false && (!location.pathname.endsWith('/login') || !api.endsWith('/signin'))) {
+            if (alert !== false && (!location.pathname.endsWith('/login') || !api.endsWith('signin'))) {
                alert = false;
             }
          }
