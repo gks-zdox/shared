@@ -1,0 +1,30 @@
+@mixin auth-theme($theme, $typography) {
+   $primary: map-get($theme, primary);
+   $accent: map-get($theme, accent);
+   $warn: map-get($theme, warn);
+   $background: map-get($theme, background);
+   $foreground: map-get($theme, foreground);
+
+   .app-login {
+      background-color: mat-color($background, background);
+
+      .box {
+         background-color: mat-color($background, card);
+         border: 1px solid mat-color($background, background);
+      }
+
+      label {
+         color: mat-color($foreground, hint-text);
+      }
+
+      .forgot {
+         font-size: 12px;
+      }
+
+      .or {
+         &:before, &:after {
+            border-color: mat-color($foreground, divider);
+         }
+      }
+   }
+}
