@@ -1,0 +1,29 @@
+<div class="content">
+   <div class="box mat-elevation-z3">
+      <img src="assets/images/zdox.svg" class="logo" alt="" />
+      <div class="title">
+         <div class="app-name">{{title ? title : 'login.title' | translate}}</div>
+         <div *ngIf="enableSignup">{{'login.or' | translate}} <a routerLink="/signup">{{'login.create' | translate}}</a></div>
+      </div>
+      <form [formGroup]="form">
+         <label>{{'login.username' | translate}}</label>
+         <input formControlName="username" required maxlength="255" autofocus [readonly]="loginButton.loading" />
+
+         <label class="password">{{'login.password' | translate}}</label>
+         <app-masked-input formControlName="password" required maxlength="255" [readonly]="loginButton.loading"></app-masked-input>
+
+         <a class="forgot" (click)="forgotPassword()">{{'login.forgot' | translate}}</a>
+         <button loading-flat color="primary" class="login basic" #loginButton
+               (click)="login()" [disabled]="form.invalid">{{'login.button' | translate}}</button>
+      </form>
+      <div *ngIf="enableSocial">
+         <div class="or">{{'login.or' | translate}}</div>
+         <button mat-stroked-button class="login facebook"
+               (click)="signInWithFacebook()" [disabled]="!facebook.ready || loginButton.loading">{{'login.facebook' | translate}}</button>
+         <button mat-stroked-button class="login google"
+               (click)="signInWithGoogle()" [disabled]="!google.ready || loginButton.loading">{{'login.google' | translate}}</button>
+      </div>
+      <button mat-flat-button class="gone"></button>
+   </div>
+</div>
+<app-footer class="app-footer"></app-footer>
