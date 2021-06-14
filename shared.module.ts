@@ -11,7 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoadingButton } from './loading-button/loading-button';
 import { FileSizePipe } from './file-size.pipe';
 import { HilightPipe } from './hilight.pipe';
-import { NumeralPipe } from './numeral.pipe';
+import { NumeralPipe, MoneyPipe, DecimalPipe } from './numeral.pipe';
 import { PaginatorComponent } from './paginator/paginator';
 import { MessageBoxComponent, MessageBox } from './message-box/message-box';
 import { Toast } from './toast/toast';
@@ -35,6 +35,8 @@ import { MaskedInputComponent } from './masked-input/masked-input';
       FileSizePipe,
       HilightPipe,
       NumeralPipe,
+      DecimalPipe,
+      MoneyPipe,
       PaginatorComponent,
       MaskedInputComponent,
       MessageBoxComponent,
@@ -49,6 +51,7 @@ import { MaskedInputComponent } from './masked-input/masked-input';
       FileSizePipe,
       HilightPipe,
       NumeralPipe,
+      DecimalPipe,
       MaskedInputComponent,
       PaginatorComponent,
       MessageBoxComponent,
