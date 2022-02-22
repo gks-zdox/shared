@@ -14,7 +14,7 @@ declare const serviceUrl: string;
 export class RestClient {
    @Output() unauthorized = new EventEmitter();
    public token = '';
-   protected url = serviceUrl;
+   public url = serviceUrl;
 
    constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private msgBox: MessageBox, private toast: Toast) { }
 
