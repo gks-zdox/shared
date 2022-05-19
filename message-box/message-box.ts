@@ -22,6 +22,7 @@ export interface MessageBoxData {
    action?: (dialogRef: MatDialogRef<MessageBoxComponent>) => boolean;
    observable?: Observable<any>;
    complete?: (result: any) => void;
+   error?: (error: any) => void;
 }
 
 @Component({
@@ -52,6 +53,10 @@ export class MessageBoxComponent {
                this.options.complete(result);
             }
             this.dialogRef.close(result || true);
+         }, (error: any) => {
+            if(this.options.error) {
+               this.options.error(error);
+            }
          }).add(() => button.reset());
       } else if (this.options.action) {
          if (this.options.action(this.dialogRef) === false) {
