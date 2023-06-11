@@ -9,18 +9,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 declare const serviceUrl: string;
-declare const eFlowServiceUrl: string;
-declare const authServiceUrl: string;
 
 @Injectable({ providedIn: 'root' })
 export class RestClient {
    @Output() unauthorized = new EventEmitter();
-   public readonly url = serviceUrl;
-   public readonly authUrl = authServiceUrl;
-   public readonly eflowUrl = eFlowServiceUrl;
    public token = '';
+   public url = serviceUrl;
 
-   constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private toast: Toast, private msgBox: MessageBox) { }
+   constructor(private http: HttpClient, private xsrfToken: HttpXsrfTokenExtractor, private msgBox: MessageBox, private toast: Toast) { }
 
    get<T>(api: string, options: any = {}): Observable<T> {
       return this.http.get<T>(this.getUrl(api), this.createHttpOptions(options))
@@ -54,7 +50,7 @@ export class RestClient {
       if (api.startsWith('http')) {
          return api;
       }
-      return `${this.url}${api.startsWith('/') ? api : `/${api}`}`;
+      return api.startsWith('/') ? `${this.url}${api}` : `${this.url}/${api}`;
    }
 
    private createHttpOptions(options: any, json = false): any {
@@ -96,7 +92,7 @@ export class RestClient {
          }
          if (e.status === 401) {
             this.unauthorized.emit(null);
-            if (alert !== false && (!location.pathname.endsWith('/login') || !api.endsWith('/signin'))) {
+            if (alert !== false && (!location.pathname.endsWith('/login') || !api.endsWith('signin'))) {
                alert = false;
             }
          }
