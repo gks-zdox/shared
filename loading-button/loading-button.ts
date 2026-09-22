@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef,
          HostBinding, HostListener, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FocusMonitor, FocusableOption, FocusOrigin } from '@angular/cdk/a11y';
-import { CanColor, CanDisable, CanDisableRipple, CanColorCtor, CanDisableCtor, CanDisableRippleCtor,
+import { CanColor, CanDisable, CanDisableRipple,
          MatRipple, mixinColor, mixinDisabled, mixinDisableRipple } from '@angular/material/core';
 
 class LoadingButtonBase {
@@ -9,8 +9,7 @@ class LoadingButtonBase {
 }
 
 // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
-const _ButtonMixinBase: CanDisableRippleCtor & CanDisableCtor & CanColorCtor
-   & typeof LoadingButtonBase = mixinColor(mixinDisabled(mixinDisableRipple(LoadingButtonBase)));
+const _ButtonMixinBase = mixinColor(mixinDisabled(mixinDisableRipple(LoadingButtonBase)));
 
 @Component({
    // eslint-disable-next-line @angular-eslint/component-selector
