@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MatLegacyMenuTrigger as MatMenuTrigger } from '@angular/material/legacy-menu';
-import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { PageEvent } from '@angular/material/paginator';
 import { NumeralPipe } from '../numeral.pipe';
 
 const DEFAULT_PAGE_SIZE = 50;
