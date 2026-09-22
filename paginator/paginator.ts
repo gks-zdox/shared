@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { PageEvent } from '@angular/material/paginator';
 import { NumeralPipe } from '../numeral.pipe';
@@ -10,6 +10,7 @@ const DEFAULT_PAGE_SIZE = 50;
     templateUrl: './paginator.html',
     styleUrls: ['./paginator.scss'],
     providers: [NumeralPipe],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PaginatorComponent implements OnInit {

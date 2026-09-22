@@ -28,7 +28,7 @@ export class ToastComponent extends SimpleSnackBar implements OnInit {
 
    constructor(public snackBarRef: MatSnackBarRef<ToastComponent>, @Inject(MAT_SNACK_BAR_DATA) data: any,
                private elementRef: ElementRef, private renderer: Renderer2) {
-      super(snackBarRef, data);
+      super();
       this.className = `toast-${data.type}`;
       if (data.type === 'error') {
          this.icon = 'error';

@@ -1,4 +1,4 @@
-import { Component, Inject, Injectable } from '@angular/core';
+import { Component, Inject, Injectable, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog, MatDialogRef,
    MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -30,6 +30,7 @@ export interface MessageBoxData {
     selector: 'app-message-box',
     templateUrl: './message-box.html',
     styleUrls: ['./message-box.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MessageBoxComponent {
