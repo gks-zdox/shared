@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding,
          Inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { MAT_SNACK_BAR_DATA, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import { MAT_LEGACY_SNACK_BAR_DATA as MAT_SNACK_BAR_DATA, MatLegacySnackBarRef as MatSnackBarRef, LegacySimpleSnackBar as SimpleSnackBar } from '@angular/material/legacy-snack-bar';
 import { AnimationCurves, AnimationDurations } from '@angular/material/core';
 
 @Component({
