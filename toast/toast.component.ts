@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding,
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MAT_SNACK_BAR_DATA, MatSnackBarRef,
          SimpleSnackBar } from '@angular/material/snack-bar';
-import { AnimationCurves, AnimationDurations } from '@angular/material/core';
 
 @Component({
     selector: 'app-toast',
@@ -16,7 +15,7 @@ import { AnimationCurves, AnimationDurations } from '@angular/material/core';
         trigger('contentFade', [
             transition(':enter', [
                 style({ opacity: '0' }),
-                animate(`${AnimationDurations.COMPLEX} ${AnimationCurves.STANDARD_CURVE}`)
+                animate('375ms cubic-bezier(0.4, 0.0, 0.2, 1)')
             ])
         ])
     ],
