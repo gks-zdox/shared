@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({name: 'fileSize'})
+@Pipe({
+    name: 'fileSize',
+    standalone: false
+})
 export class FileSizePipe implements PipeTransform {
    transform(n: number): string {
       if (isNaN(n)) { return 'n/a'; }

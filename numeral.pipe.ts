@@ -2,7 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 declare let numeral: any;
 
-@Pipe({name: 'numeral'})
+@Pipe({
+    name: 'numeral',
+    standalone: false
+})
 export class NumeralPipe implements PipeTransform {
    transform(value?: string | number, format?: string): string {
       if (value === undefined || value === null) {
@@ -12,7 +15,10 @@ export class NumeralPipe implements PipeTransform {
    }
 }
 
-@Pipe({ name: 'money' })
+@Pipe({
+    name: 'money',
+    standalone: false
+})
 export class MoneyPipe implements PipeTransform {
    transform(value: number | undefined): string {
       if (value === undefined || value === null) {
@@ -22,7 +28,10 @@ export class MoneyPipe implements PipeTransform {
    }
 }
 
-@Pipe({ name: 'decimal' })
+@Pipe({
+    name: 'decimal',
+    standalone: false
+})
 export class DecimalPipe implements PipeTransform {
    transform(value: number | undefined): string {
       if (value === undefined || value === null) {

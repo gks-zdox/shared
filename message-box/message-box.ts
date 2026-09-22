@@ -27,9 +27,10 @@ export interface MessageBoxData {
 }
 
 @Component({
-   selector: 'app-message-box',
-   templateUrl: './message-box.html',
-   styleUrls: ['./message-box.scss']
+    selector: 'app-message-box',
+    templateUrl: './message-box.html',
+    styleUrls: ['./message-box.scss'],
+    standalone: false
 })
 export class MessageBoxComponent {
    titleClass: string;

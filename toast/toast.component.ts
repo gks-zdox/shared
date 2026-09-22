@@ -6,20 +6,21 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarRef,
 import { AnimationCurves, AnimationDurations } from '@angular/material/core';
 
 @Component({
-   selector: 'app-toast',
-   templateUrl: './toast.component.html',
-   styleUrls: ['./toast.component.scss'],
-   encapsulation: ViewEncapsulation.None,
-   preserveWhitespaces: false,
-   changeDetection: ChangeDetectionStrategy.OnPush,
-   animations: [
-      trigger('contentFade', [
-         transition(':enter', [
-            style({ opacity: '0' }),
-            animate(`${AnimationDurations.COMPLEX} ${AnimationCurves.STANDARD_CURVE}`)
-         ])
-      ])
-   ]
+    selector: 'app-toast',
+    templateUrl: './toast.component.html',
+    styleUrls: ['./toast.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('contentFade', [
+            transition(':enter', [
+                style({ opacity: '0' }),
+                animate(`${AnimationDurations.COMPLEX} ${AnimationCurves.STANDARD_CURVE}`)
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class ToastComponent extends SimpleSnackBar implements OnInit {
    @HostBinding('@contentFade') fade = true;

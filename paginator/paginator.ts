@@ -6,10 +6,11 @@ import { NumeralPipe } from '../numeral.pipe';
 const DEFAULT_PAGE_SIZE = 50;
 
 @Component({
-   selector: 'app-paginator',
-   templateUrl: './paginator.html',
-   styleUrls: ['./paginator.scss'],
-   providers: [NumeralPipe]
+    selector: 'app-paginator',
+    templateUrl: './paginator.html',
+    styleUrls: ['./paginator.scss'],
+    providers: [NumeralPipe],
+    standalone: false
 })
 export class PaginatorComponent implements OnInit {
    @HostBinding('class') get className(): string { return 'app-paginator'; }

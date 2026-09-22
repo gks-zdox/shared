@@ -8,10 +8,11 @@ export const MASKED_INPUT_ACCESSOR: any = {
 };
 
 @Component({
-   selector: 'app-masked-input',
-   templateUrl: './masked-input.html',
-   styleUrls: ['./masked-input.scss'],
-   providers: [MASKED_INPUT_ACCESSOR]
+    selector: 'app-masked-input',
+    templateUrl: './masked-input.html',
+    styleUrls: ['./masked-input.scss'],
+    providers: [MASKED_INPUT_ACCESSOR],
+    standalone: false
 })
 export class MaskedInputComponent implements ControlValueAccessor {
    @HostBinding('class') className = 'app-masked-input';

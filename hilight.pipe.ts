@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'hilight' })
+@Pipe({
+    name: 'hilight',
+    standalone: false
+})
 export class HilightPipe implements PipeTransform {
    transform(s: any, t?: string, exact = false): string {
       if (!t || t.length === 0) {
