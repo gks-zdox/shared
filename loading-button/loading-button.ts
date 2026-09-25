@@ -10,7 +10,9 @@ import { MatRipple } from '@angular/material/core';
     host: {
         '[attr.disabled]': 'disabled || null',
         '[class.mat-button-disabled]': 'disabled',
-        class: 'mat-focus-indicator'
+        '[class.mat-primary]': "color === 'primary'",
+        '[class.mat-accent]': "color === 'accent'",
+        '[class.mat-warn]': "color === 'warn'"
     },
     templateUrl: 'loading-button.html',
     styleUrls: ['loading-button.scss'],
@@ -29,8 +31,12 @@ export class LoadingButton implements AfterViewInit, OnDestroy, FocusableOption 
    private start = 0;
 
    constructor(private elementRef: ElementRef, private focusMonitor: FocusMonitor) {
-      const css = this.getHostElement().hasAttribute('loading-flat') ? 'mat-flat-button' : 'mat-stroked-button';
-      this.getHostElement().classList.add(css, 'mat-button-base');
+      const flat = this.getHostElement().hasAttribute('loading-flat');
+      this.getHostElement().classList.add(
+         'mdc-button', 'mat-mdc-button-base',
+         flat ? 'mdc-button--unelevated' : 'mdc-button--outlined',
+         flat ? 'mat-mdc-unelevated-button' : 'mat-mdc-outlined-button'
+      );
    }
 
    @HostListener('click')
