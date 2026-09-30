@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -99,7 +98,6 @@ export class Facebook extends SocialLogin {
 export class Google extends SocialLogin {
    constructor() {
       super();
-      // eslint-disable-next-line no-underscore-dangle
       (window as any).___gcfg = { lang: this.lang };
       (window as any).googleInit = this.googleInit.bind(this);
    }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewChild, forwardRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewChild, forwardRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 export const MASKED_INPUT_ACCESSOR: any = {
@@ -8,10 +8,12 @@ export const MASKED_INPUT_ACCESSOR: any = {
 };
 
 @Component({
-   selector: 'app-masked-input',
-   templateUrl: './masked-input.html',
-   styleUrls: ['./masked-input.scss'],
-   providers: [MASKED_INPUT_ACCESSOR]
+    selector: 'app-masked-input',
+    templateUrl: './masked-input.html',
+    styleUrls: ['./masked-input.scss'],
+    providers: [MASKED_INPUT_ACCESSOR],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class MaskedInputComponent implements ControlValueAccessor {
    @HostBinding('class') className = 'app-masked-input';

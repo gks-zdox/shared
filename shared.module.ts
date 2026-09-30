@@ -19,46 +19,42 @@ import { ToastComponent } from './toast/toast.component';
 import { MaskedInputComponent } from './masked-input/masked-input';
 
 @NgModule({
-   imports: [
-      CommonModule,
-      FormsModule,
-      MatButtonModule,
-      MatDialogModule,
-      MatIconModule,
-      MatMenuModule,
-      MatRippleModule,
-      MatSnackBarModule,
-      MatTooltipModule
-   ],
-   declarations: [
-      LoadingButton,
-      FileSizePipe,
-      HilightPipe,
-      NumeralPipe,
-      DecimalPipe,
-      MoneyPipe,
-      PaginatorComponent,
-      MaskedInputComponent,
-      MessageBoxComponent,
-      ToastComponent
-   ],
-   entryComponents: [
-      MessageBoxComponent,
-      ToastComponent
-   ],
-   exports: [
-      LoadingButton,
-      FileSizePipe,
-      HilightPipe,
-      NumeralPipe,
-      DecimalPipe,
-      MaskedInputComponent,
-      PaginatorComponent,
-      MessageBoxComponent,
-      ToastComponent
-   ],
-   providers: [
-      MessageBox, Toast
-   ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatMenuModule,
+        MatRippleModule,
+        MatSnackBarModule,
+        MatTooltipModule
+    ],
+    declarations: [
+        LoadingButton,
+        FileSizePipe,
+        HilightPipe,
+        NumeralPipe,
+        DecimalPipe,
+        MoneyPipe,
+        PaginatorComponent,
+        MaskedInputComponent,
+        MessageBoxComponent,
+        ToastComponent
+    ],
+    exports: [
+        LoadingButton,
+        FileSizePipe,
+        HilightPipe,
+        NumeralPipe,
+        DecimalPipe,
+        MaskedInputComponent,
+        PaginatorComponent,
+        MessageBoxComponent,
+        ToastComponent
+    ],
+    providers: [
+        MessageBox, Toast
+    ]
 })
 export class SharedModule { }
