@@ -20,7 +20,6 @@ import { MatRipple } from '@angular/material/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LoadingButton implements AfterViewInit, OnDestroy, FocusableOption {
    @Input() color?: string;
    @Input() disabled = false;
