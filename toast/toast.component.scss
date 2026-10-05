@@ -4,7 +4,14 @@
    line-height: 24px;
 }
 
+// The snack bar paints its surface from these tokens, not from the
+// container's own background-color, so the per-type bars have to be set
+// through them. Info and success share the original light bar and differ only
+// by icon color; warn and error get their own bar and text color.
 .mat-mdc-snack-bar-container {
+   --mat-snack-bar-container-color: #fafafa;
+   --mat-snack-bar-supporting-text-color: rgba(0, 0, 0, 0.87);
+
    &.toast-info .mat-icon {
       color: #56c0e0;
    }
@@ -14,13 +21,13 @@
    }
 
    &.toast-warn {
-      background-color: #323232;
-      color: #ffc107;
+      --mat-snack-bar-container-color: #323232;
+      --mat-snack-bar-supporting-text-color: #ffc107;
    }
 
    &.toast-error {
-      background-color: #f44336;
-      color: #fff;
+      --mat-snack-bar-container-color: #f44336;
+      --mat-snack-bar-supporting-text-color: #fff;
    }
 }
 
