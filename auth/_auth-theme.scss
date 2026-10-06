@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @mixin auth-theme($theme, $typography) {
    $primary: map-get($theme, primary);
    $accent: map-get($theme, accent);
@@ -6,15 +7,15 @@
    $foreground: map-get($theme, foreground);
 
    .app-login {
-      background-color: mat-color($background, background);
+      background-color: mat.m2-get-color-from-palette($background, background);
 
       .box {
-         background-color: mat-color($background, card);
-         border: 1px solid mat-color($background, background);
+         background-color: mat.m2-get-color-from-palette($background, card);
+         border: 1px solid mat.m2-get-color-from-palette($background, background);
       }
 
       label {
-         color: mat-color($foreground, hint-text);
+         color: mat.m2-get-color-from-palette($foreground, hint-text);
       }
 
       .forgot {
@@ -23,7 +24,7 @@
 
       .or {
          &:before, &:after {
-            border-color: mat-color($foreground, divider);
+            border-color: mat.m2-get-color-from-palette($foreground, divider);
          }
       }
    }

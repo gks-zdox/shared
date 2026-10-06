@@ -1,24 +1,25 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding,
          Inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { MAT_SNACK_BAR_DATA, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
-import { AnimationCurves, AnimationDurations } from '@angular/material/core';
+import { MAT_SNACK_BAR_DATA, MatSnackBarRef,
+         SimpleSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-   selector: 'app-toast',
-   templateUrl: './toast.component.html',
-   styleUrls: ['./toast.component.scss'],
-   encapsulation: ViewEncapsulation.None,
-   preserveWhitespaces: false,
-   changeDetection: ChangeDetectionStrategy.OnPush,
-   animations: [
-      trigger('contentFade', [
-         transition(':enter', [
-            style({ opacity: '0' }),
-            animate(`${AnimationDurations.COMPLEX} ${AnimationCurves.STANDARD_CURVE}`)
-         ])
-      ])
-   ]
+    selector: 'app-toast',
+    templateUrl: './toast.component.html',
+    styleUrls: ['./toast.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('contentFade', [
+            transition(':enter', [
+                style({ opacity: '0' }),
+                animate('375ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class ToastComponent extends SimpleSnackBar implements OnInit {
    @HostBinding('@contentFade') fade = true;
@@ -27,7 +28,7 @@ export class ToastComponent extends SimpleSnackBar implements OnInit {
 
    constructor(public snackBarRef: MatSnackBarRef<ToastComponent>, @Inject(MAT_SNACK_BAR_DATA) data: any,
                private elementRef: ElementRef, private renderer: Renderer2) {
-      super(snackBarRef, data);
+      super();
       this.className = `toast-${data.type}`;
       if (data.type === 'error') {
          this.icon = 'error';

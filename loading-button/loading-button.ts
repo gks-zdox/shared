@@ -1,48 +1,41 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef,
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input,
          HostBinding, HostListener, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FocusMonitor, FocusableOption, FocusOrigin } from '@angular/cdk/a11y';
-import { CanColor, CanDisable, CanDisableRipple, CanColorCtor, CanDisableCtor, CanDisableRippleCtor,
-         MatRipple, mixinColor, mixinDisabled, mixinDisableRipple } from '@angular/material/core';
-
-class LoadingButtonBase {
-   constructor(public _elementRef: ElementRef) { }
-}
-
-// eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
-const _ButtonMixinBase: CanDisableRippleCtor & CanDisableCtor & CanColorCtor
-   & typeof LoadingButtonBase = mixinColor(mixinDisabled(mixinDisableRipple(LoadingButtonBase)));
+import { MatRipple } from '@angular/material/core';
 
 @Component({
-   // eslint-disable-next-line @angular-eslint/component-selector
-   selector: 'button[loading-button], button[loading-flat], button[loading-stroked]',
-   exportAs: 'loadingButton',
-   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-   host: {
-      '[attr.disabled]': 'disabled || null',
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      '[class._mat-animation-noopable]': '_animationMode === "NoopAnimations"',
-      '[class.mat-button-disabled]': 'disabled',
-      class: 'mat-focus-indicator'
-   },
-   templateUrl: 'loading-button.html',
-   styleUrls: ['loading-button.scss'],
-   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-   inputs: ['disabled', 'disableRipple', 'color'],
-   encapsulation: ViewEncapsulation.None,
-   changeDetection: ChangeDetectionStrategy.OnPush
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'button[loading-button], button[loading-flat], button[loading-stroked]',
+    exportAs: 'loadingButton',
+    host: {
+        '[attr.disabled]': 'disabled || null',
+        '[class.mat-button-disabled]': 'disabled',
+        '[class.mat-primary]': "color === 'primary'",
+        '[class.mat-accent]': "color === 'accent'",
+        '[class.mat-warn]': "color === 'warn'"
+    },
+    templateUrl: 'loading-button.html',
+    styleUrls: ['loading-button.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
-export class LoadingButton extends _ButtonMixinBase
-   implements AfterViewInit, OnDestroy, CanDisable, CanColor, CanDisableRipple, FocusableOption {
+export class LoadingButton implements AfterViewInit, OnDestroy, FocusableOption {
+   @Input() color?: string;
+   @Input() disabled = false;
+   @Input() disableRipple = false;
    @HostBinding('class.loading') loading = false;
    @ViewChild(MatRipple) ripple!: MatRipple;
    restoreDisabled?: boolean;
    private start = 0;
 
    constructor(private elementRef: ElementRef, private focusMonitor: FocusMonitor) {
-      super(elementRef);
-      const css = this.getHostElement().hasAttribute('loading-flat') ? 'mat-flat-button' : 'mat-stroked-button';
-      this.getHostElement().classList.add(css, 'mat-button-base');
+      const flat = this.getHostElement().hasAttribute('loading-flat');
+      this.getHostElement().classList.add(
+         'mdc-button', 'mat-mdc-button-base',
+         flat ? 'mdc-button--unelevated' : 'mdc-button--outlined',
+         flat ? 'mat-mdc-unelevated-button' : 'mat-mdc-outlined-button'
+      );
    }
 
    @HostListener('click')
