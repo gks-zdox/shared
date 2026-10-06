@@ -46,12 +46,14 @@ export class ToastComponent extends SimpleSnackBar implements OnInit {
 
    ngOnInit(): void {
       const parentNode = this.findContainer();
-      this.renderer.addClass(parentNode, this.className);
+      if (parentNode) {
+         this.renderer.addClass(parentNode, this.className);
+      }
    }
 
    private findContainer(): any {
       let e = this.elementRef.nativeElement;
-      while (e && e.tagName.toLowerCase() !== 'snack-bar-container') {
+      while (e && e.tagName?.toLowerCase() !== 'mat-snack-bar-container') {
          e = e.parentNode;
       }
       return e;
